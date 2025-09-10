@@ -28,4 +28,11 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
+   public Product(){
+
+   }
+    public Product(String ddd, Category books) {
+       this.name=ddd;
+       this.category=books;
+    }
 }

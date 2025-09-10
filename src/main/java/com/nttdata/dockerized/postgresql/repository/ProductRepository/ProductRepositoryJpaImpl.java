@@ -60,6 +60,10 @@ public class ProductRepositoryJpaImpl implements ProductRepository {
 
     @Override
     public List<Product> findByCategoryName(String categoryName) {
+        if (categoryName == null) {
+            throw new IllegalArgumentException("categoryName must not be null");
+        }
+
         return jpa.findByCategoryNameNative(categoryName);
     }
 }

@@ -1,5 +1,6 @@
 package com.nttdata.dockerized.postgresql.model.entity;
 
+import com.nttdata.dockerized.postgresql.repository.CategoryRepository.CategoryRepository;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,4 +17,11 @@ public class Category {
 
     @Column(nullable = false, unique = true)
     private String name;
+
+    public Category(String books) {
+        this.name=books;
+    }
+    public Category(){
+
+    }
 }

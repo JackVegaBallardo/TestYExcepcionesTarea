@@ -50,6 +50,9 @@ public class ProductRepositoryEmImpl implements ProductRepository {
 
     @Override
     public List<Product> findByCategoryName(String categoryName) {
+        if (categoryName == null) {
+            throw new IllegalArgumentException("categoryName must not be null");
+        }
         return em.createQuery(
                         "SELECT p FROM Product p WHERE p.category.name = :name",
                         Product.class
