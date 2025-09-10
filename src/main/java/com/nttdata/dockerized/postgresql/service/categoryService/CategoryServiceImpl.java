@@ -1,8 +1,11 @@
 package com.nttdata.dockerized.postgresql.service.categoryService;
 
+
+import com.nttdata.dockerized.postgresql.Handle.NotFoundException;
 import com.nttdata.dockerized.postgresql.model.entity.Category;
 import com.nttdata.dockerized.postgresql.repository.CategoryRepository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,6 +26,11 @@ public class CategoryServiceImpl implements CategoryService {
     public Optional<Category> findById(Long id) {
         return categoryRepository.findById(id);
                 
+    }
+    @Override
+    public Category findByIdOrThrow(Long id) {
+        return categoryRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Category " + id + " not found"));
     }
 
     @Override
