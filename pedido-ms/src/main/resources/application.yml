@@ -4,8 +4,8 @@ spring:
 
   datasource:
     url: jdbc:postgresql://localhost:5432/pedido_db
-    username: postgres
-    password: postgres
+    username: root
+    password: root
     driver-class-name: org.postgresql.Driver
 
   jpa:
