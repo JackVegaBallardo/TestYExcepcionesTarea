@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: composite-pedido-ms
+
+server:
+  port: 8088
+
+pedido:
+  ms:
+    url: http://localhost:8081
