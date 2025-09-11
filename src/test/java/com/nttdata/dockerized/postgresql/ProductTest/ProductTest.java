@@ -4,8 +4,6 @@ import com.nttdata.dockerized.postgresql.model.entity.Category;
 import com.nttdata.dockerized.postgresql.model.entity.Product;
 import com.nttdata.dockerized.postgresql.repository.CategoryRepository.CategoryRepository;
 import com.nttdata.dockerized.postgresql.repository.ProductRepository.ProductRepository;
-import jakarta.persistence.PersistenceException;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
