@@ -1,20 +1,25 @@
 spring:
   application:
     name: pedido-ms
-
   datasource:
-    url: jdbc:postgresql://localhost:5432/pedido_db
-    username: postgres
-    password: postgres
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/pedido_db}
+    username: ${SPRING_DATASOURCE_USERNAME:root}
+    password: ${SPRING_DATASOURCE_PASSWORD:root}
     driver-class-name: org.postgresql.Driver
-
   jpa:
-    hibernate:
-      ddl-auto: update
+    hibernate.ddl-auto: update
     show-sql: true
     properties:
-      hibernate:
-        format_sql: true
+      hibernate.format_sql: true
 
 server:
-  port: 8081
+  port: ${SERVER_PORT:8080}
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true
