@@ -29,5 +29,6 @@
         <module>gateway</module>
         <module>CompositionPedido</module>
         <module>eureka-server</module>
+        <module>stock-ms</module>
     </modules>
 </project>
