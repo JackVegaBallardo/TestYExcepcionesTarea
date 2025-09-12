@@ -1,29 +1,52 @@
 version: "3.9"
+
 services:
-  java_app:
-    container_name: java_app
-    image: nttdata-java-app:1.0.0
-    build: .
-    ports:
-      - 8081:8080
+  postgres:
+    image: postgres:16
     environment:
-      - DATABASE_URL=jdbc:postgresql://java_db:5432/postgres
-      - DATABASE_USERNAME=postgres
-      - DATABASE_PASSWORD=postgres
+      POSTGRES_DB: pedido_db
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+    ports:
+      - "5432:5432"
+    networks: [shared-net]
+
+  pedido-ms:
+    build:
+      context: ./pedido-ms
+      dockerfile: Dockerfile
+    image: pedido-ms:1.0
+    environment:
+      SERVER_PORT: "8080"
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://postgres:5432/pedido_db"
+      SPRING_DATASOURCE_USERNAME: "root"
+      SPRING_DATASOURCE_PASSWORD: "root"
+    depends_on: [postgres, eureka-server]
+    networks: [shared-net]
+
+  eureka-server:
+    build:
+      context: ./eureka-server
+      dockerfile: Dockerfile
+    image: eureka-server:1.0
+    ports:
+      - "8761:8761"
+    networks: [shared-net]
+
+  composite-pedido:
+    build:
+      context: ./CompositionPedido
+      dockerfile: Dockerfile
+    image: composite-pedido:1.0
+    environment:
+      SERVER_PORT: "8088"
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://eureka-server:8761/eureka/"
     depends_on:
-      - java_db
-  java_db:
-    container_name: java_db
-    image: postgres:15
+      - eureka-server
+      - pedido-ms
     ports:
-      - 5432:5432
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: postgres
-    volumes:
-      - database:/var/lib/postgresql/data
-volumes:
-  database:
+      - "8088:8088"
+    networks: [ shared-net ]
 
-
+networks:
+  shared-net: { driver: bridge }

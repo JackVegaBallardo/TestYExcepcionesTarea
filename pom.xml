@@ -28,5 +28,6 @@
         <module>product-ms</module>
         <module>gateway</module>
         <module>CompositionPedido</module>
+        <module>eureka-server</module>
     </modules>
 </project>

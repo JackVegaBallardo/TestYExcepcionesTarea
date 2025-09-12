@@ -1,10 +1,23 @@
 spring:
   application:
-    name: composite-pedido-ms
-
+    name: composite-pedido
 server:
   port: 8088
 
-pedido:
-  ms:
-    url: http://localhost:8081
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true
+
+logging:
+  level:
+    feign: DEBUG
+feign:
+  client:
+    config:
+      default:
+        loggerLevel: FULL

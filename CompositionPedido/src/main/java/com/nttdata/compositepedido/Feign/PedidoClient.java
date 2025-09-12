@@ -7,11 +7,8 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-@FeignClient(
-        name = "pedidoClient",
-        url = "${pedido.ms.url}",
-        path = "/pedidos"
-)
+
+@FeignClient(name = "pedido-ms", path = "/pedidos")
 public interface PedidoClient {
 
     @PostMapping
