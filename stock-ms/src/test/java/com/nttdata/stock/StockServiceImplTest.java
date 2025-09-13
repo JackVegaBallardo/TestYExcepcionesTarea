@@ -36,6 +36,8 @@ class StockServiceImplTest {
         service = new StockServiceImpl(repository, mapper);
     }
 
+
+
     @Test
     void saveAll_ok_returnsResponses() {
         var req = List.of(

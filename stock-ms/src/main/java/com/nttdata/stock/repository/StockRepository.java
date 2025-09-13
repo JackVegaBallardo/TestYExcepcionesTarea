@@ -11,6 +11,4 @@ public interface StockRepository extends JpaRepository<Stock, Integer> {
     Integer sumQuantityByProductId(Integer productId);
 
     boolean existsByProductId(Integer productId);
-
-    boolean existsByProductIdAndWarehouseId(Integer productId, Integer warehouseId);
 }
